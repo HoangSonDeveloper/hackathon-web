@@ -55,12 +55,19 @@ const ReportTable = ({ data, onView, onArchive }) => {
       width: 400,
     },
     {
+      key: "createdAt",
+      title: "CreatedAt",
+      dataIndex: "createdAt",
+      width: 280,
+    },
+    {
       key: "action",
       title: "Actions",
       dataIndex: "action",
       width: 360,
       fixed: "right",
       render: (text, record) => {
+        console.log(record);
         return (
           <div>
             <Button
@@ -121,7 +128,7 @@ const factoryStep = (steps) => {
       case "click":
         result += `MobileElement el${index + 1} = driver.findElementByAccessibilityId("${id}");el${index + 1}.${action}();\n`;
         break;
-      case "input":
+      case "typing":
         result += `MobileElement el${index + 1} = driver.findElementByAccessibilityId("${id}");el${index + 1}.sendKeys("${extra?.inputValue}");\n`;
         break;
       case "scroll":
