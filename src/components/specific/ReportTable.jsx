@@ -23,6 +23,7 @@ const ReportTable = ({ data, onView, onArchive }) => {
       title: "Platform",
       dataIndex: "platform",
       width: 100,
+      align: "center",
       render: (text) => {
         return (
           <Row style={{ alignItems: "center", justifyContent: "center" }}>
@@ -37,7 +38,7 @@ const ReportTable = ({ data, onView, onArchive }) => {
     },
     {
       key: "action",
-      title: "Action",
+      title: "Actions",
       dataIndex: "action",
       width: 240,
       fixed: "right",

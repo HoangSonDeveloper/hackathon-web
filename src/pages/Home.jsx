@@ -73,8 +73,8 @@ const Home = () => {
         />
       </Row>
       <ReportTable onArchive={onArchive} onView={onView} data={files} />
-      <Modal onCancel={() => setOpen(false)} open={open}>
-        <ReactJson src={selectedItem} />
+      <Modal width={1000} onCancel={() => setOpen(false)} open={open}>
+        <ReactJson collapseStringsAfterLength={100} src={selectedItem} />
       </Modal>
     </Col>
   );
