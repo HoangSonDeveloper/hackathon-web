@@ -1,7 +1,7 @@
 import apiClient from "./api";
 
-const getTrackings = async (params) => {
-  const queryParams = !!params?.name ? { name: params?.name } : null;
+const getTrackings = async (user) => {
+  const queryParams = !!user ? { user } : null;
   try {
     const res = await apiClient.get("/api/tracking/get", {
       params: queryParams,
@@ -12,10 +12,12 @@ const getTrackings = async (params) => {
   }
 };
 
-const downloadFileTracking = async (params) => {
+const archiveTracking = async (id) => {
   try {
-    const res = await apiClient.get("/api/tracking/download", {
-      params: params?.id,
+    const res = await apiClient.get("/api/tracking/archive", {
+      params: {
+        id,
+      },
     });
     return res.data.data;
   } catch (e) {
@@ -23,4 +25,4 @@ const downloadFileTracking = async (params) => {
   }
 };
 
-export { getTrackings, downloadFileTracking };
+export { getTrackings, archiveTracking };

@@ -1,31 +1,72 @@
 import React from "react";
-import { Button, Table } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+import { Button, Image, Row, Table } from "antd";
+import {
+  AndroidOutlined,
+  AppleOutlined,
+  DownloadOutlined,
+  InboxOutlined,
+} from "@ant-design/icons";
+import { archiveTracking } from "../../services/trackingService";
 
-const ReportTable = ({ data }) => {
+const ReportTable = ({ data, onView, onArchive }) => {
   const columns = [
-    { key: "id", title: "ID", dataIndex: "_id" },
-    { key: "user", title: "User", dataIndex: "user" },
-    { key: "appVersion", title: "AppVersion", dataIndex: "appVer" },
+    { key: "id", title: "ID", dataIndex: "_id", width: 240 },
+    {
+      key: "user",
+      title: "User",
+      dataIndex: "user",
+      width: 300,
+    },
+    { key: "appVersion", title: "AppVersion", dataIndex: "appVer", width: 120 },
+    {
+      key: "platform",
+      title: "Platform",
+      dataIndex: "platform",
+      width: 100,
+      render: (text) => {
+        return (
+          <Row style={{ alignItems: "center", justifyContent: "center" }}>
+            {text === "ios" ? (
+              <AppleOutlined style={{ fontSize: 24 }} />
+            ) : (
+              <AndroidOutlined style={{ fontSize: 24 }} />
+            )}
+          </Row>
+        );
+      },
+    },
     {
       key: "action",
       title: "Action",
       dataIndex: "action",
       width: 240,
+      fixed: "right",
       render: (text, record) => {
         return (
           <div>
-            <Button onClick={() => onDownload(record)}>
+            <Button
+              style={{ marginRight: 8 }}
+              type={"primary"}
+              onClick={() => onView(record?.steps)}
+            >
+              View
+            </Button>
+            <Button
+              style={{ marginRight: 8 }}
+              onClick={() => onDownload(record)}
+            >
               Download
               <DownloadOutlined />
+            </Button>
+            <Button onClick={() => onArchive(record)}>
+              Archive
+              <InboxOutlined />
             </Button>
           </div>
         );
       },
     },
   ];
-
-  const onView = () => {};
 
   const onDownload = async (record) => {
     const factoryData = factoryStep(record?.steps);
@@ -42,7 +83,14 @@ const ReportTable = ({ data }) => {
     }, 0);
   };
 
-  return <Table dataSource={data} columns={columns} />;
+  return (
+    <Table
+      showSorterTooltip={{ target: "sorter-icon" }}
+      scroll={{ x: 1500 }}
+      dataSource={data}
+      columns={columns}
+    />
+  );
 };
 
 const factoryStep = (steps) => {
@@ -58,7 +106,7 @@ const factoryStep = (steps) => {
         result += `MobileElement el${index + 1} = driver.findElementByAccessibilityId("${id}");el${index + 1}.sendKeys("${extra?.inputValue}");\n`;
         break;
       case "scroll":
-        result += `MobileElement el${index + 1} = driver.findElementByAccessibilityId("${id}");el${index + 1}.scroll(${extra?.scrollDirection});\n`;
+        result += `MobileElement el${index + 1} = (MobileElement) driver.findElementByAccessibilityId("${id}");el${index + 1}.scroll(${extra?.scroll?.direction});percent(${(extra?.scroll?.percent).toString()});\n`;
         break;
       default:
         result += `MobileElement el${index + 1} = driver.findElementByAccessibilityId("${id}");el${index + 1}.${action}();\n`;
