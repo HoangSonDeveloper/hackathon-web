@@ -6,24 +6,36 @@ import {
   DownloadOutlined,
   InboxOutlined,
 } from "@ant-design/icons";
-import { archiveTracking } from "../../services/trackingService";
 
 const ReportTable = ({ data, onView, onArchive }) => {
   const columns = [
     { key: "id", title: "ID", dataIndex: "_id", width: 240 },
     {
       key: "user",
-      title: "User",
+      title: "AgentID",
       dataIndex: "user",
-      width: 300,
+      width: 160,
     },
     { key: "appVersion", title: "AppVersion", dataIndex: "appVer", width: 120 },
+    { key: "appCode", title: "AppCode", dataIndex: "appCode", width: 120 },
+    {
+      key: "deviceName",
+      title: "DeviceName",
+      dataIndex: "deviceName",
+      width: 160,
+    },
+    {
+      key: "versionOS",
+      title: "VersionOS",
+      dataIndex: "versionOS",
+      width: 120,
+    },
     {
       key: "platform",
       title: "Platform",
       dataIndex: "platform",
-      width: 100,
       align: "center",
+      width: 120,
       render: (text) => {
         return (
           <Row style={{ alignItems: "center", justifyContent: "center" }}>
@@ -37,10 +49,16 @@ const ReportTable = ({ data, onView, onArchive }) => {
       },
     },
     {
+      key: "description",
+      title: "Description",
+      dataIndex: "description",
+      width: 400,
+    },
+    {
       key: "action",
       title: "Actions",
       dataIndex: "action",
-      width: 240,
+      width: 360,
       fixed: "right",
       render: (text, record) => {
         return (

@@ -51,6 +51,26 @@ const Home = () => {
     >
       <Row
         style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={{
+            textTransform: "capitalize",
+            fontSize: 48,
+            textAlign: "center",
+            fontWeight: "bold",
+            marginBottom: 24,
+            color: "#c1177c",
+          }}
+        >
+          auto-X
+        </Text>
+      </Row>
+
+      <Row
+        style={{
           padding: 12,
           background: "white",
           borderRadius: 12,
@@ -64,7 +84,7 @@ const Home = () => {
             marginBottom: 12,
           }}
         >
-          Tìm kiếm theo user
+          Tìm kiếm theo agentID
         </Text>
         <Input
           style={{ height: 40 }}
