@@ -65,14 +65,16 @@ const ReportTable = ({ data, onView, onArchive }) => {
       width: 280,
       render: (text) => {
         const date = new Date(text);
-        const hour = date.getHours();
-        const minute = date.getMinutes();
-        const day = date.getDay();
-        const month = date.getMonth();
-        const year = date.getFullYear();
-        return (
-          <p>{`${padding(hour)}:${padding(minute)} - ${padding(day)}/${padding(month)}/${year}`}</p>
-        );
+        if (date) {
+          const hour = date.getHours();
+          const minute = date.getMinutes();
+          const day = date.getDay();
+          const month = date.getMonth();
+          const year = date.getFullYear();
+          return (
+            <p>{`${padding(hour)}:${padding(minute)} - ${padding(day)}/${padding(month)}/${year}`}</p>
+          );
+        } else return <div />;
       },
     },
     {
