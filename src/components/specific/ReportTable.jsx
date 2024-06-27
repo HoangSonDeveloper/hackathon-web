@@ -147,7 +147,7 @@ const factoryStep = (steps) => {
         result += `MobileElement el${index + 1} = driver.findElementByAccessibilityId("${id}");el${index + 1}.sendKeys("${extra?.inputValue}");\n`;
         break;
       case "scroll":
-        result += `MobileElement el${index + 1} = (MobileElement) driver.findElementByAccessibilityId("${id}");el${index + 1}.scroll(${extra?.scroll?.direction});percent(${(extra?.scroll?.percent).toString()});\n`;
+        result += `MobileElement el${index + 1} = (MobileElement) driver.findElementByAccessibilityId("${id}");el${index + 1}.scroll(${extra?.scroll?.direction});percent(${extra?.scroll?.percent?.toString()});\n`;
         break;
       default:
         result += `MobileElement el${index + 1} = driver.findElementByAccessibilityId("${id}");el${index + 1}.${action}();\n`;
