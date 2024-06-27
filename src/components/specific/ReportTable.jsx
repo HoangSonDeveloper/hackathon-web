@@ -71,8 +71,7 @@ const ReportTable = ({ data, onView, onArchive }) => {
         const month = date.getMonth();
         const year = date.getFullYear();
         return (
-          // <p>{`${padding(hour)}:${padding(minute)} - ${padding(day)}/${padding(month)}/${year}`}</p>
-          <p></p>
+          <p>{`${padding(hour)}:${padding(minute)} - ${padding(day)}/${padding(month)}/${year}`}</p>
         );
       },
     },
