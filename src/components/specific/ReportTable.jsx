@@ -7,6 +7,10 @@ import {
   InboxOutlined,
 } from "@ant-design/icons";
 
+const padding = (num) => {
+  return num < 10 ? `0${num}` : num;
+};
+
 const ReportTable = ({ data, onView, onArchive }) => {
   const columns = [
     { key: "id", title: "ID", dataIndex: "_id", width: 240 },
@@ -59,6 +63,17 @@ const ReportTable = ({ data, onView, onArchive }) => {
       title: "CreatedAt",
       dataIndex: "createdAt",
       width: 280,
+      render: (text) => {
+        const date = new Date(text);
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+        const day = date.getDay();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        return (
+          <p>{`${padding(hour)}:${padding(minute)} - ${padding(day)}/${padding(month)}/${year}`}</p>
+        );
+      },
     },
     {
       key: "action",
